@@ -21,12 +21,12 @@ public class DepartamentoService implements IDepartamentoService {
 
     @Override
     public List<Departamento> readAll() {
-        return null;
+        return departamentoRepository.findAll();
     }
 
     @Override
     public Departamento create(Departamento deparmento) {
-        return null;
+        return departamentoRepository.save(deparmento);
     }
 
     @Override
