@@ -17,6 +17,7 @@ public class ExampleController {
 
     @GetMapping("/example")
     public List<Example> read(){
+        System.out.println("Estas en el método read");
         return exampleService.read();
     }
 }
