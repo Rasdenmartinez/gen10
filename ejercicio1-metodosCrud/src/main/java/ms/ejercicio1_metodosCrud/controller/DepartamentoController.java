@@ -5,6 +5,7 @@ import ms.ejercicio1_metodosCrud.service.impl.DepartamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.*;
 
@@ -17,13 +18,36 @@ public class DepartamentoController {
     public Optional<Departamento> readById(@PathVariable Long id){
         return departamentoService.readById(id);
     }
+<<<<<<< HEAD
     @GetMapping("/departamento/todos")
+=======
+
+    @GetMapping("/departamento")
+>>>>>>> main
     public List<Departamento> readAll(){
         return departamentoService.readAll();
     }
     @PostMapping("/departamento")
+<<<<<<< HEAD
     public Departamento create(@RequestBody Departamento departamento) {
         return departamentoService.create(departamento);
     }
+=======
+    public Departamento create(@RequestBody Departamento departamento){
+        return departamentoService.create(departamento);
+    }
+
+    @PutMapping("/departamento")
+    public Departamento update(@RequestBody Departamento departamento){
+        return departamentoService.update(departamento);
+    }
+
+    @DeleteMapping("/departamento")
+    public String delete(@RequestBody Departamento departamento){
+         return departamentoService.delete(departamento);
+    }
+
+>>>>>>> main
 }
+
 
