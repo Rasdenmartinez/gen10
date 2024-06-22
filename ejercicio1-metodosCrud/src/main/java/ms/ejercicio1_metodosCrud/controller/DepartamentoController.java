@@ -18,11 +18,11 @@ public class DepartamentoController {
         return departamentoService.readById(id);
     }
 
-    @GetMapping("/departamento")
+    @GetMapping("/departamento/todos")
     public List<Departamento> readAll(){
         return departamentoService.readAll();
     }
-    @PostMapping("/departamento")
+    @PostMapping("/departament")
     public Departamento create(@RequestBody Departamento departamento){
         return departamentoService.create(departamento);
     }
