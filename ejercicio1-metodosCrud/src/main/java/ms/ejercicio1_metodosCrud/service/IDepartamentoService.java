@@ -10,5 +10,5 @@ public interface IDepartamentoService {
     public List<Departamento> readAll();
     public Departamento create(Departamento deparmento);
     public Departamento update(Departamento deparmento);
-    public String delete(Departamento departamento);
+    public void delete(Long id);
 }
