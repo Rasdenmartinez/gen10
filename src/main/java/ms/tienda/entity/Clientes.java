@@ -30,5 +30,5 @@ public class Clientes {
 
     @Column (name = "telefono")
     private String telefono;
-
+    //aver si ya po que no deja joder
 }
