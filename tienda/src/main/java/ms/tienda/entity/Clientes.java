@@ -31,5 +31,5 @@ public class Clientes {
     @Column (name = "telefono")
     private String telefono;
 
-    //this new
+    //this new jask
 }
