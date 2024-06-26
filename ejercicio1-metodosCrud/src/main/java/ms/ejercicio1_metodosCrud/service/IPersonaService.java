@@ -1,6 +1,7 @@
 package ms.ejercicio1_metodosCrud.service;
 
 import ms.ejercicio1_metodosCrud.entity.Persona;
+import ms.ejercicio1_metodosCrud.response.PersonaResponse;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,4 +16,7 @@ public interface IPersonaService {
     public List<Persona> findName(String name);
 
     List<Persona> findEdad(Byte edad);
+
+    List<PersonaResponse> response(String name);
+    List<PersonaResponse> responseQuery(String name);
 }
