@@ -2,10 +2,15 @@ package ms.ejercicio1_metodosCrud.controller;
 
 import jakarta.websocket.server.PathParam;
 import ms.ejercicio1_metodosCrud.entity.Persona;
+import ms.ejercicio1_metodosCrud.response.PersonaResponse;
+import ms.ejercicio1_metodosCrud.response.Response;
 import ms.ejercicio1_metodosCrud.service.impl.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.function.EntityResponse;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +50,37 @@ public class PersonaController {
     @DeleteMapping("/persona")
     public String delete(@RequestBody Persona persona){
          return personaService.delete(persona);
+    }
+
+    @GetMapping("/personaResponse")
+    public ResponseEntity<List<PersonaResponse>> response(@PathParam("name") String name){
+        EntityResponse<List<PersonaResponse>> personResponseListEntity;
+        List<PersonaResponse> personaResponseList=personaService.response(name);
+        if(personaResponseList.size()>=1){
+            return new ResponseEntity<>(personaResponseList, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+    @GetMapping("/personaResponseQuery")
+    public ResponseEntity<Response> responseQuery(@PathParam("name") String name){
+
+        EntityResponse<List<PersonaResponse>> personResponseListEntity;
+        List<PersonaResponse> personaResponseList=personaService.responseQuery(name);
+        if(personaResponseList.size()>=1){
+            Response response=Response.builder()
+                    .message("Success")
+                    .code("0")
+                    .personaResponseList(personaResponseList).build();
+
+            return new ResponseEntity<>(response,HttpStatus.OK);
+        }else{
+            Response response=Response.builder()
+                    .message("Not found, verify your parameters")
+                    .code("1005")
+                    .personaResponseList(personaResponseList).build();
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
 }
