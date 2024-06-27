@@ -1,9 +1,15 @@
 package ms.ejercicio1_metodosCrud.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "departamento")
+@Entity//identificador decapa y mapeo de base de datos ORM
+@Data//genera automaticamente los getter y setter
+@AllArgsConstructor//genera el constructor con todos los atributos
+@NoArgsConstructor//genera constructor sin atributos
+@Table(name = "departamento")//referencia con nombre la tabla
 public class Departamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,37 +19,6 @@ public class Departamento {
     private Double m2;
     @Column(name = "precio")
     private Double precio;
-
-    public Departamento() {
-    }
-
-    public Departamento(Long id, Double m2, Double precio) {
-        this.id = id;
-        this.m2 = m2;
-        this.precio = precio;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Double getM2() {
-        return m2;
-    }
-
-    public void setM2(Double m2) {
-        this.m2 = m2;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
+    @Column(name = "is_active")
+    private Boolean isActive;
 }
