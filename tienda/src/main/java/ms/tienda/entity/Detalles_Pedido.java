@@ -17,12 +17,10 @@ public class Detalles_Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @ManyToOne
-    @JoinColumn(name = "pedido")
-    private Pedido pedido;
-    @ManyToOne
-    @JoinColumn(name = "producto")
-    private Productos producto;
+    @Column(name = "pedido")
+    private int pedido;
+    @Column(name = "producto")
+    private int producto;
     @Column(name = "cantidad")
     private int cantidad;
     @Column(name = "precio_unitario", precision = 10, scale = 2)
