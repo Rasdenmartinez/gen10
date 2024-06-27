@@ -18,7 +18,7 @@ public class ProductoController {
         return productoService.readById(id);
     }
 
-    @GetMapping("/producto")
+    @GetMapping("/producto/todos")
     public List<Producto> readAll(){
         return productoService.readAll();
     }
