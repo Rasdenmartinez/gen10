@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data//genera automaticamente los getter y setter
 @AllArgsConstructor//genera el constructor con todos los atributos
 @NoArgsConstructor//genera constructor sin atributos
-@Table(name = "producto")//referencia con nombre la tabla
+@Table(name = "productos")//referencia con nombre la tabla
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +15,8 @@ public class Producto {
     private Long id;
     @Column(name = "nombre")
     private String nombre;
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Column(name = "descripcion_producto")
+    private String descripcion_producto;
     @Column(name = "precio")
     private Double precio;
     @Column(name = "categoria")
