@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor//genera constructor sin atributos
 @Table(name = "productos")//referencia con nombre la tabla
 public class Producto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -30,4 +31,5 @@ public class Producto {
     private Long id_proveedor;
     @Column(name = "is_active")
     private Boolean isActive;
+
 }
