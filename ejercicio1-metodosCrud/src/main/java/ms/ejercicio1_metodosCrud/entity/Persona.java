@@ -22,7 +22,7 @@ public class Persona {
     @Column(name = "edad")
     private Byte edad;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_departamento")
     private Departamento idDepartamento;
 
