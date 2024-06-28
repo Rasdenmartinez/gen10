@@ -18,7 +18,13 @@ public class DepartamentoService implements IDepartamentoService {
 
     @Override
     public Optional<Departamento> readById(Long id) {
-        return departamentoRepository.findById(id);
+        Optional<Departamento> departamentoOptional=departamentoRepository.findById(id);
+        Double m2=departamentoOptional.get().getM2()+100;
+        Departamento departamento=new Departamento(departamentoOptional.get().getId(),
+                m2,departamentoOptional.get().getPrecio(),
+                departamentoOptional.get().getIsActive());
+
+        return Optional.of(departamento);
     }
 
     @Override
@@ -52,8 +58,7 @@ public class DepartamentoService implements IDepartamentoService {
             }
 
         }else{
-            return "Departamento "+departamento.getId()+" no se encontró";
-
+            return "Departamento "+departamento.getId()+" no se encontro";
         }
 
 
