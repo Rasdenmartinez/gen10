@@ -30,8 +30,5 @@ public class Clientes {
 
     @Column (name = "telefono")
     private String telefono;
-<<<<<<< HEAD
 
-=======
->>>>>>> 6772ff397828f79a0e1d834e1c95b5383c3a04a5
 }
