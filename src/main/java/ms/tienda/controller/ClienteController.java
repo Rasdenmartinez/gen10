@@ -1,8 +1,13 @@
 package ms.tienda.controller;
 
+import jakarta.websocket.server.PathParam;
+import ms.tienda.customerAndEmployeeResponse.CustomerDTO;
+import ms.tienda.customerAndEmployeeResponse.CustomerResponse;
 import ms.tienda.entity.Clientes;
 import ms.tienda.service.impl.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,4 +42,31 @@ public class ClienteController {
     public String delete(@RequestBody  Clientes cliente){
         return clienteService.delete(cliente);
     }
+
+    @GetMapping("/clientes/nombre")
+    public List<Clientes> findByName(@PathParam("nombre") String nombre){
+        return clienteService.findName(nombre);
+    }
+
+    @GetMapping("/clientes/responseQuery")
+    public ResponseEntity<CustomerResponse> responseQuery(@PathParam("nombre") String nombre){
+        List<CustomerDTO> customerResponseList=clienteService.responseQuery(nombre);
+        CustomerResponse response;
+        if(customerResponseList.isEmpty()){
+            response=CustomerResponse.builder()
+                    .message("Not Found, verify your parameters")
+                    .codeMessage("1005")
+                    .build();
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }else{
+            response=CustomerResponse.builder()
+                    .message("Succes")
+                    .codeMessage("0")
+                    .customerResponseList(customerResponseList)
+                    .build();
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+    }
+
+
 }
