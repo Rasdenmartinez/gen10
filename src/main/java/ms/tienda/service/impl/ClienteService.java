@@ -1,6 +1,7 @@
 package ms.tienda.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import ms.tienda.customerAndEmployeeResponse.CustomerDTO;
 import ms.tienda.entity.Clientes;
 import ms.tienda.repository.ClientesRepository;
 import ms.tienda.service.IClienteService;
@@ -56,4 +57,23 @@ public class ClienteService implements IClienteService {
 
         }
     }
+
+    @Override
+    public List<Clientes> findName(String nombre) {
+        return clientesRepository.findByNombre(nombre);
+    }
+
+    @Override
+    public List<CustomerDTO> responseQuery(String nombre) {
+        List<Object[]> objectList=clientesRepository.customerResponse(nombre);
+        List<CustomerDTO> customerResponseList=objectList.stream().map(s->{
+            CustomerDTO customerResponse=new CustomerDTO();
+            customerResponse.setNombre(s[0].toString());
+            customerResponse.setMail(s[1].toString());
+            customerResponse.setTelefono(s[2].toString());
+            return customerResponse;
+        }).toList();
+        return customerResponseList;
+    }
+
 }
