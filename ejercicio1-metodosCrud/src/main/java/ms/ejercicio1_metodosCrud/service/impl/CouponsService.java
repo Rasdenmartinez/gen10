@@ -10,14 +10,14 @@ import java.util.List;
 
 @Service
 public class CouponsService implements ICouponsService {
-    @Autowired
-    CouponsClient couponsClient;
+//    @Autowired
+//    CouponsClient couponsClient;
 
-//    private final CouponsClient couponsClient;
-//
-//    public CouponsService(CouponsClient couponsClient) {
-//        this.couponsClient = couponsClient;
-//    }
+    private final CouponsClient couponsClient;
+
+    public CouponsService(CouponsClient couponsClient) {
+        this.couponsClient = couponsClient;
+    }
 
 
     @Override
