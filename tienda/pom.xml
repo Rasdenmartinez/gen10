@@ -70,6 +70,12 @@
 			<artifactId>mapstruct</artifactId>
 			<version>1.5.3.Final</version> <!-- Añadido -->
 		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>1.5.3.Final</version> <!-- Añadido -->
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -99,5 +105,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

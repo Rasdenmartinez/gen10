@@ -7,25 +7,16 @@ import java.util.List;
 public class Response {
     private String message;
     private String code;
-    private Object singleData;
-    private List<Object> multiData;
-
-    public Response() {}
+    private Object data;
 
     public Response(String message, String code) {
         this.message = message;
         this.code = code;
     }
 
-    public Response(String message, String code, Object singleData) {
+    public Response(String message, String code, Object data) {
         this.message = message;
         this.code = code;
-        this.singleData = singleData;
-    }
-
-    public Response(String message, String code, List<Object> multiData) {
-        this.message = message;
-        this.code = code;
-        this.multiData = multiData;
+        this.data = data;
     }
 }
