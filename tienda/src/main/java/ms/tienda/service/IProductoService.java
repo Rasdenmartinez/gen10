@@ -17,5 +17,6 @@ public interface IProductoService {
     public Producto create(Producto producto);
     public Producto update(Producto producto);
     public String delete(Producto producto);
+    public List<ProductoResponse> findProductosByProveedorId(Long idProveedor);
 
 }

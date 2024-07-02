@@ -131,4 +131,16 @@ public class ProductoController {
         }
     }
 
+    @GetMapping("/productoResponseIdProveedorQuery/{id}")
+    public ResponseEntity<Response> findByProveedorId(@PathVariable Long id){
+        List<ProductoResponse> productosResponse = productoService.findProductosByProveedorId(id);
+        if (productosResponse.isEmpty()) {
+            Response response = new Response("No se encontraron productos", "1");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        } else {
+            Response response = new Response("Éxito", "0", productosResponse);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+    }
+
 }

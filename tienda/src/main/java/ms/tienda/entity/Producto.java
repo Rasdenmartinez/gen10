@@ -3,11 +3,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ms.tienda.entity.Proveedor;
+
 @Entity//identificador de capa y mapeo de base de datos ORM
 @Data//genera automaticamente los getter y setter
 @AllArgsConstructor//genera el constructor con todos los atributos
 @NoArgsConstructor//genera constructor sin atributos
 @Table(name = "productos")//referencia con nombre la tabla
+
 public class Producto {
 
     @Id
@@ -22,13 +25,9 @@ public class Producto {
     private Double precio;
     @Column(name = "categoria")
     private String categoria;
-    /*
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name= "id_proveedor")
-    private Proveedor id_proveedor;
-    */
-    @Column(name = "id_proveedor")
-    private Long id_proveedor;
+    private Proveedor proveedor;
     @Column(name = "is_active")
     private Boolean isActive;
 

@@ -75,4 +75,11 @@ public class ProductoService implements IProductoService {
         } else
             return "Producto no encontrado";
     }
+
+    @Override
+    public List<ProductoResponse> findProductosByProveedorId(Long idProveedor) {
+        List<Producto> productos = productoRepository.findProductosByProveedorId(idProveedor);
+        return productoMapper.toProductoResponseList(productos);
+    }
+
 }
