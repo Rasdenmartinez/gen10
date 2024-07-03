@@ -10,7 +10,7 @@ import java.util.List;
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     List<Producto> findByNombreContainingIgnoreCase(String nombre);
-
+    //Query
     @Query(value = "SELECT * FROM productos p WHERE p.id_proveedor = ?1", nativeQuery = true)
     List<Producto> findProductosByProveedorId(Long id);
 
