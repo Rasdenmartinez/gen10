@@ -18,7 +18,7 @@ public class DepartamentoController {
         return departamentoService.readById(id);
     }
 
-    @GetMapping("/departamento/todos")
+    @GetMapping("/departamento")
     public List<Departamento> readAll(){
         return departamentoService.readAll();
     }
@@ -26,6 +26,17 @@ public class DepartamentoController {
     public Departamento create(@RequestBody Departamento departamento){
         return departamentoService.create(departamento);
     }
+
+    @PutMapping("/departamento")
+    public Departamento update(@RequestBody Departamento departamento){
+        return departamentoService.update(departamento);
+    }
+
+    @DeleteMapping("/departamento")
+    public String delete(@RequestBody Departamento departamento){
+         return departamentoService.delete(departamento);
+    }
+
 }
 
 
