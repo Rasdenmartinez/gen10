@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import ms.tienda.entity.Proveedor;
 
 @Data
 @AllArgsConstructor
@@ -12,6 +13,6 @@ import lombok.ToString;
 public class ProductoResponse {
     private String nombre;
     private Double precio;
-    private Long id_proveedor;
+    private Proveedor proveedor;
     private Boolean isActive;
 }
