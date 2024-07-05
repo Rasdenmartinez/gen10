@@ -19,34 +19,33 @@ import java.util.Optional;
 public class EmpleadoController {
     @Autowired
     EmpleadoService empleadoService;
-
     @GetMapping("/empleados/{idEmpleado}")
-    public Optional<Empleados> readById(@PathVariable Long idEmpleado) {
+    public Optional<Empleados> readById(@PathVariable Long idEmpleado){
         return empleadoService.readById(idEmpleado);
     }
 
     @GetMapping("/empleados/all")
-    public List<Empleados> readAll() {
+    public List<Empleados> readAll(){
         return empleadoService.readAll();
     }
 
     @PutMapping("/empleados/create")
-    public Empleados create(@RequestBody Empleados empleado) {
+    public Empleados create(@RequestBody Empleados empleado){
         return empleadoService.create(empleado);
     }
 
     @PostMapping("/empleados/update")
-    public Empleados update(@RequestBody Empleados empleado) {
+    public Empleados update(@RequestBody Empleados empleado){
         return empleadoService.update(empleado);
     }
 
     @DeleteMapping("/empleados/delete")
-    public String delete(@RequestBody Empleados empleado) {
+    public String delete(@RequestBody  Empleados empleado){
         return empleadoService.delete(empleado);
     }
 
     @GetMapping("/empleados/nombre")
-    public List<Empleados> findByNombre(String nombre) {
+    public List<Empleados> findByNombre(String nombre){
         return empleadoService.findNombre(nombre);
     }
 
