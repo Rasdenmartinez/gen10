@@ -12,7 +12,7 @@ public interface IClienteService {
     public Clientes create(Clientes cliente); //crear
     public Clientes update(Clientes cliente); //actualizar
     public String delete(Clientes cliente);
-//Parametros de response
+//Parametros
     List<Clientes> findName(String nombre);
     List<CustomerDTO> responseQuery(String nombre);
 
