@@ -13,16 +13,17 @@ import java.util.Optional;
 public class DepartamentoController {
     @Autowired
     DepartamentoService departamentoService;
+
     @GetMapping("/departamento/{id}")
     public Optional<Departamento> readById(@PathVariable Long id){
         return departamentoService.readById(id);
     }
 
-    @GetMapping("/departamento/todos")
+    @GetMapping("/departamento")
     public List<Departamento> readAll(){
         return departamentoService.readAll();
     }
-    @PostMapping("/departament")
+    @PostMapping("/departamento")
     public Departamento create(@RequestBody Departamento departamento){
         return departamentoService.create(departamento);
     }
