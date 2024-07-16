@@ -1,11 +1,8 @@
 package ms.tienda.entity;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity//identificador de capa y mapeo de base de datos ORM
 @Data//genera automaticamente los getter y setter

@@ -22,6 +22,7 @@ public class PersonaController {
     @Autowired
     PersonaService personaService;
     @GetMapping("/persona/{id}")
+
     public Optional<Persona> readById(@PathVariable Long id){
         return personaService.readById(id);
     }
@@ -30,6 +31,7 @@ public class PersonaController {
     public List<Persona> readAll(){
         return personaService.readAll();
     }
+
     @GetMapping("/persona/nombre")
     public List<Persona> findName(@PathParam("name") String name){
         return personaService.findName(name);
@@ -85,5 +87,3 @@ public class PersonaController {
     }
 
 }
-
-

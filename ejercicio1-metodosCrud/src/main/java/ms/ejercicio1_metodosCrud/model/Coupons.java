@@ -18,3 +18,4 @@ public class Coupons {
     private String time;
     private Long id;
 }
+

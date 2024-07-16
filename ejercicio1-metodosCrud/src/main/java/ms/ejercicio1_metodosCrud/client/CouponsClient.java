@@ -21,4 +21,3 @@ public interface CouponsClient {
     Coupons update(@PathVariable("id") Long id, @RequestBody Coupons coupons);
     @DeleteMapping("/coupons/{id}")
     Coupons delete(@PathVariable("id") Long id);
-}
