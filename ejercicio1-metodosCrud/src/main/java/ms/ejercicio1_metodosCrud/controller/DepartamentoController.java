@@ -13,6 +13,7 @@ import java.util.Optional;
 public class DepartamentoController {
     @Autowired
     DepartamentoService departamentoService;
+
     @GetMapping("/departamento/{id}")
     public Optional<Departamento> readById(@PathVariable Long id){
         return departamentoService.readById(id);

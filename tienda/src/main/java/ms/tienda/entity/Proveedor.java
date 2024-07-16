@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ms.tienda.entity.Producto;
-import java.util.List;
+
 
 @Entity
 @Data

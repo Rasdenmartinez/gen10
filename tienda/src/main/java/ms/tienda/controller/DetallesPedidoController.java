@@ -1,5 +1,8 @@
 package ms.tienda.controller;
 
+import ms.tienda.details_orders.DetailsOrdersDTO;
+import ms.tienda.details_orders.DetailsOrdersResponse;
+import jakarta.websocket.server.PathParam;
 import ms.tienda.entity.Detalles_Pedido;
 import ms.tienda.service.impl.Detalles_PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,51 +16,55 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1")
 public class DetallesPedidoController {
+
     @Autowired
-    Detalles_PedidoService detalles_pedidoService;
+    Detalles_PedidoService detallesPedidoService;
 
     @GetMapping("/detalles_pedidos/{id}")
-    public ResponseEntity<?> readById(@PathVariable Long id) {
-        Optional<Detalles_Pedido> detalles_pedido = detalles_pedidoService.readById(id);
-        if (detalles_pedido.isPresent()) {
-            return new ResponseEntity<>(detalles_pedido.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("El producto no fue encontrado", HttpStatus.NOT_FOUND);
-        }
+    public Optional<Detalles_Pedido> readById(@PathVariable Long id) {
+        return detallesPedidoService.readById(id);
     }
 
     @GetMapping("/detalles_pedidos")
-    public ResponseEntity<List<Detalles_Pedido>> readAll() {
-        List<Detalles_Pedido> detalles_pedidos = detalles_pedidoService.readAll();
-        if (!detalles_pedidos.isEmpty()) {
-            return new ResponseEntity<>(detalles_pedidos, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
+    public List<Detalles_Pedido> detallesPedidos() {
+        return detallesPedidoService.readAll();
     }
+
     @PostMapping("/detalles_pedidos")
-    public ResponseEntity<Detalles_Pedido> create(@RequestBody Detalles_Pedido detalles_pedido) {
-        Detalles_Pedido createdDetelles_Pedido = detalles_pedidoService.create(detalles_pedido);
-        return new ResponseEntity<>(createdDetelles_Pedido, HttpStatus.CREATED);
+    public Detalles_Pedido create(@RequestBody Detalles_Pedido detalles_pedido) {
+        return detallesPedidoService.create(detalles_pedido);
     }
 
-    @PutMapping("/detalles_pedidos")
-    public ResponseEntity<Detalles_Pedido> update(@RequestBody Detalles_Pedido detalles_pedido) {
-        Detalles_Pedido updateDetalles_Pedidos = detalles_pedidoService.update(detalles_pedido);
-        return new ResponseEntity<>(updateDetalles_Pedidos, HttpStatus.OK);
+    @PutMapping("/detalles_pedidos/")
+    public Detalles_Pedido update(@RequestBody Detalles_Pedido detalles_pedido) {
+        return detallesPedidoService.update(detalles_pedido);
     }
 
-    @DeleteMapping("/detalles_pedidos")
-    public ResponseEntity<String> delete(@RequestBody Detalles_Pedido detalles_pedido) {
-        try {
-            boolean isDeleted = detalles_pedidoService.delete((long) detalles_pedido.getId());
-            if (isDeleted) {
-                return new ResponseEntity<>("Eliminación exitosa", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Detalles_Pedido no encontrado", HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception ex) {
-            return new ResponseEntity<>("Error al eliminar Detalles_Pedido", HttpStatus.INTERNAL_SERVER_ERROR);
+    @DeleteMapping("/detalles_pedidos/{id}")
+    public String delete(@PathVariable Long id) {
+        Detalles_Pedido detalles_pedido = new Detalles_Pedido();
+        detalles_pedido.setId(id);
+        return detallesPedidoService.delete(detalles_pedido);
+    }
+
+    @GetMapping("/detalles_pedidos/response")
+    public ResponseEntity<DetailsOrdersResponse> responseQuery(@PathParam("id") String id){
+        List<DetailsOrdersDTO> detailsOrdersResponseList=detallesPedidoService.response(id);
+        DetailsOrdersResponse response;
+        if(detailsOrdersResponseList.isEmpty()){
+            response=DetailsOrdersResponse.builder()
+                    .message("Not Found, verify your parameters")
+                    .codeMessage("1005")
+                    .build();
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }else{
+            response=DetailsOrdersResponse.builder()
+                    .message("Succes")
+                    .codeMessage("0")
+                    .detailsordersResponseList(detailsOrdersResponseList)
+                    .build();
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
     }
+
 }

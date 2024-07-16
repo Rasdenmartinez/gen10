@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface ProductoMapper {
 
-    @Mapping(source = "proveedor", target = "proveedor")
+    @Mapping(source = "id_proveedor", target = "proveedor")
     ProductoResponse toProductoResponse(Producto producto);
 
     List<ProductoResponse> toProductoResponseList(List<Producto> productos);

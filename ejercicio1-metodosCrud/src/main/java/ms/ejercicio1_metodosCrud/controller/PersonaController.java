@@ -18,9 +18,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1")
 public class PersonaController {
+
     @Autowired
     PersonaService personaService;
     @GetMapping("/persona/{id}")
+
     public Optional<Persona> readById(@PathVariable Long id){
         return personaService.readById(id);
     }
@@ -29,6 +31,7 @@ public class PersonaController {
     public List<Persona> readAll(){
         return personaService.readAll();
     }
+
     @GetMapping("/persona/nombre")
     public List<Persona> findName(@PathParam("name") String name){
         return personaService.findName(name);
@@ -37,19 +40,19 @@ public class PersonaController {
     public List<Persona> findEdad(@PathParam("edad") Byte edad){
         return personaService.findEdad(edad);
     }
-    @PostMapping("/persona")
+    @PostMapping("/persona/create")
     public Persona create(@RequestBody Persona persona){
         return personaService.create(persona);
     }
 
-    @PutMapping("/persona")
+    @PutMapping("/persona/update")
     public Persona update(@RequestBody Persona persona){
         return personaService.update(persona);
     }
 
-    @DeleteMapping("/persona")
+    @DeleteMapping("/persona/delete")
     public String delete(@RequestBody Persona persona){
-         return personaService.delete(persona);
+        return personaService.delete(persona);
     }
 
     @GetMapping("/personaResponse")
@@ -84,5 +87,3 @@ public class PersonaController {
     }
 
 }
-
-

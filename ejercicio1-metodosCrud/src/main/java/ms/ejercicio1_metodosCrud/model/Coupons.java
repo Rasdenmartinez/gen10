@@ -10,11 +10,12 @@ import java.time.LocalTime;
 @ToString
 @Builder
 public class Coupons {
-    private Long id;
     private String name;
     private String edad;
     private String direccion;
     private String city;
     private String animals;
     private String time;
+    private Long id;
 }
+
