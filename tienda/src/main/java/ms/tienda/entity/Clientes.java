@@ -1,6 +1,7 @@
 package ms.tienda.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class Clientes {
     @Column (name = "direccion")
     private String direccion;
 
+    @Email
     @Column (name = "correo_electronico")
     private String mail;
 
