@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import ms.tienda.entity.Inventario;
 import ms.tienda.mapper.InventarioMapper;
 import ms.tienda.repository.InventarioRepository;
+import ms.tienda.response.InventarioResponse;
 import ms.tienda.service.IInventarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,56 +26,56 @@ public class InventarioService implements IInventarioService {
     }
 
     @Override
-    public Optional<PedidoResponse> readByIdResponse(Long id) {
-        Optional<Pedido> pedidoOpt = pedidoRepository.findById(id);
-        return pedidoOpt.map(pedidoMapper::toPedidoResponse);
+    public Optional<InventarioResponse> readByIdResponse(Long id) {
+        Optional<Inventario> inventarioOpt = inventarioRepository.findById(id);
+        return inventarioOpt.map(inventarioMapper::toInventarioResponse);
     }
 
     @Override
-    public List<Pedido> readAll() {
-        return pedidoRepository.findAll().stream().filter(s -> s.getIsActive()).toList();
+    public List<Inventario> readAll() {
+        return inventarioRepository.findAll().stream().filter(s -> s.getIsActive()).toList();
     }
 
     @Override
-    public List<PedidoResponse> readAllResponse() {
-        List<Pedido> pedidos = pedidoRepository.findAll().stream().filter(s->s.getIsActive()).toList();
-        return pedidoMapper.toPedidoResponseList(pedidos);
+    public List<InventarioResponse> readAllResponse() {
+        List<Inventario> pedidos = inventarioRepository.findAll().stream().filter(s->s.getIsActive()).toList();
+        return inventarioMapper.toInventarioResponseList(pedidos);
     }
 
     @Override
-    public List<Pedido> findFechaPedido(LocalDate fecha) {
-        return pedidoRepository.findByFechaPedidoEquals(fecha);
+    public List<Inventario> findIsActive(Boolean isActive) {
+        return inventarioRepository.findByIsActiveEquals(isActive);
     }
 
     @Override
-    public List<PedidoResponse> findFechaPedidoResponse(LocalDate fecha) {
-        List<Pedido> pedidos = pedidoRepository.findByFechaPedidoEquals(fecha);
-        return pedidoMapper.toPedidoResponseList(pedidos);
+    public List<InventarioResponse> findIsActiveResponse(Boolean isActive) {
+        List<Inventario> inventarios = inventarioRepository.findByIsActiveEquals(isActive);
+        return inventarioMapper.toInventarioResponseList(inventarios);
     }
 
     @Override
-    public Pedido create(Pedido pedido) {
-        return pedidoRepository.save(pedido);
+    public Inventario create(Inventario inventario) {
+        return inventarioRepository.save(inventario);
     }
 
     @Override
-    public Pedido update(Pedido pedido) {
-        return pedidoRepository.save(pedido);
+    public Inventario update(Inventario inventario) {
+        return inventarioRepository.save(inventario);
     }
 
     @Override
-    public String delete(Pedido pedido) {
-        if(pedido.equals(pedidoRepository.findById(pedido.getId()).orElse(null))){
-            pedido.setIsActive(false);
-            pedidoRepository.save(pedido);
-            return "Pedido eliminado";
+    public String delete(Inventario inventario) {
+        if(inventario.equals(inventarioRepository.findById(inventario.getId()).orElse(null))){
+            inventario.setIsActive(false);
+            inventarioRepository.save(inventario);
+            return "Inventario eliminado";
         } else
-            return "Pedido no encontrado";
+            return "Inventario no encontrado";
     }
 
     @Override
-    public List<PedidoResponse> findPedidosByClienteId(Long idCliente) {
-        List<Pedido> pedidos = pedidoRepository.findPedidosByClienteId(idCliente);
-        return pedidoMapper.toPedidoResponseList(pedidos);
+    public List<InventarioResponse> findByIsActiveTrue() {
+        List<Inventario> inventarios = inventarioRepository.findByIsActiveTrue();
+        return inventarioMapper.toInventarioResponseList(inventarios);
     }
 }

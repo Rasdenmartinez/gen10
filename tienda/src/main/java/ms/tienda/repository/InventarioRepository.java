@@ -11,5 +11,5 @@ public interface InventarioRepository extends JpaRepository<Inventario, Long> {
     List<Inventario> findByIsActiveEquals(Boolean isActive);
     //Query
     @Query(value = "SELECT * FROM pedidos p WHERE p.is_active = true", nativeQuery = true)
-    List<Inventario> findByIsActiveTrue(Long id);
+    List<Inventario> findByIsActiveTrue();
 }

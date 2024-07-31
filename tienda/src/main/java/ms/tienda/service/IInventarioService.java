@@ -16,6 +16,6 @@ public interface IInventarioService {
     public Inventario create(Inventario inventario);
     public Inventario update(Inventario inventario);
     public String delete(Inventario inventario);
-    public List<InventarioResponse> findByIsActive(Boolean isActive);
+    public List<InventarioResponse> findByIsActiveTrue();
 
 }
