@@ -1,9 +1,9 @@
 package ms.tienda.controller;
 
 import ms.tienda.entity.Inventario;
+import ms.tienda.response.InventarioResponse;
 import ms.tienda.response.Response;
 import ms.tienda.service.impl.InventarioService;
-import ms.tienda.service.impl.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +15,16 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1")
 public class InventarioController {
+
     @Autowired
     InventarioService inventarioService;
-    @GetMapping("/pedido/{id}")
+    @GetMapping("/inventario/{id}")
     public ResponseEntity<Response> readById(@PathVariable Long id) {
-        Optional<Pedido> pedidoOpt = pedidoService.readById(id);
-        Pedido pedido;
-        if (pedidoOpt.isPresent()) {
-            pedido = pedidoOpt.get();
-            Response response = new Response("Éxito", "0", pedido);
+        Optional<Inventario> inventarioOpt = inventarioService.readById(id);
+        Inventario inventario;
+        if (inventarioOpt.isPresent()) {
+            inventario = inventarioOpt.get();
+            Response response = new Response("Éxito", "0", inventario);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             Response response = new Response("No encontrado", "1");
@@ -31,13 +32,13 @@ public class InventarioController {
         }
     }
 
-    @GetMapping("/pedidoResponse/{id}")
+    @GetMapping("/inventarioResponse/{id}")
     public ResponseEntity<Response> readByIdResponse(@PathVariable Long id) {
-        Optional<PedidoResponse> pedidoOpt = pedidoService.readByIdResponse(id);
-        PedidoResponse pedidoResponse;
-        if (pedidoOpt.isPresent()) {
-            pedidoResponse = pedidoOpt.get();
-            Response response = new Response("Éxito", "0", pedidoResponse);
+        Optional<InventarioResponse> inventarioOpt = inventarioService.readByIdResponse(id);
+        InventarioResponse inventarioResponse;
+        if (inventarioOpt.isPresent()) {
+            inventarioResponse = inventarioOpt.get();
+            Response response = new Response("Éxito", "0", inventarioResponse);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             Response response = new Response("No encontrado", "1");
@@ -45,100 +46,100 @@ public class InventarioController {
         }
     }
 
-    @GetMapping("/pedido/todos")
+    @GetMapping("/inventario/todos")
     public ResponseEntity<Response> readAll() {
-        List<Pedido> pedidos = pedidoService.readAll();
-        if (pedidos.isEmpty()) {
-            Response response = new Response("No se encontraron pedidos", "1");
+        List<Inventario> inventarios = inventarioService.readAll();
+        if (inventarios.isEmpty()) {
+            Response response = new Response("No se encontraron inventarios", "1");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         } else {
-            Response response = new Response("Éxito", "0", pedidos);
+            Response response = new Response("Éxito", "0", inventarios);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
     }
 
-    @GetMapping("/pedidoResponse/todos")
+    @GetMapping("/inventarioResponse/todos")
     public ResponseEntity<Response> readAllResponse() {
-        List<PedidoResponse> pedidosResponse = pedidoService.readAllResponse();
-        if (pedidosResponse.isEmpty()) {
-            Response response = new Response("No se encontraron pedidos", "1");
+        List<InventarioResponse> inventariosResponse = inventarioService.readAllResponse();
+        if (inventariosResponse.isEmpty()) {
+            Response response = new Response("No se encontraron inventarios", "1");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         } else {
-            Response response = new Response("Éxito", "0", pedidosResponse);
+            Response response = new Response("Éxito", "0", inventariosResponse);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
     }
 
-    @GetMapping("/pedido/fecha")
-    public ResponseEntity<Response> findFechaPedido(@RequestParam LocalDate fecha) {
-        List<Pedido> pedidos = pedidoService.findFechaPedido(fecha);
-        if (pedidos.isEmpty()) {
-            Response response = new Response("No se encontraron pedidos con la fecha proporcionada", "1");
+    @GetMapping("/inventario/isActive")
+    public ResponseEntity<Response> findIsActive(@RequestParam Boolean isActive) {
+        List<Inventario> inventarios = inventarioService.findIsActive(isActive);
+        if (inventarios.isEmpty()) {
+            Response response = new Response("No se encontraron inventarios", "1");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         } else {
-            Response response = new Response("Éxito", "0", pedidos);
+            Response response = new Response("Éxito", "0", inventarios);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
     }
 
-    @GetMapping("/pedidoResponse/fecha")
-    public ResponseEntity<Response> findFechaPedidoResponse(@RequestParam LocalDate fecha) {
-        List<PedidoResponse> pedidosResponse = pedidoService.findFechaPedidoResponse(fecha);
-        if (pedidosResponse.isEmpty()) {
-            Response response = new Response("No se encontraron pedidos con la fecha proporcionada", "1");
+    @GetMapping("/inventarioResponse/isActive")
+    public ResponseEntity<Response> findIsActiveResponse(@RequestParam Boolean isActive) {
+        List<InventarioResponse> inventariosResponse = inventarioService.findIsActiveResponse(isActive);
+        if (inventariosResponse.isEmpty()) {
+            Response response = new Response("No se encontraron inventarios", "1");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         } else {
-            Response response = new Response("Éxito", "0", pedidosResponse);
+            Response response = new Response("Éxito", "0", inventariosResponse);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
     }
 
-    @PostMapping("/pedido")
-    public ResponseEntity<Response> create(@RequestBody Pedido pedido) {
+    @PostMapping("/inventario")
+    public ResponseEntity<Response> create(@RequestBody Inventario inventario) {
         try {
-            Pedido nuevoPedido = pedidoService.create(pedido);
-            Response response = new Response("Pedido creado con éxito", "0", nuevoPedido);
+            Inventario nuevoInventario = inventarioService.create(inventario);
+            Response response = new Response("Inventario creado con éxito", "0", nuevoInventario);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (Exception e) {
-            Response response = new Response("Error al crear el pedido", "1");
+            Response response = new Response("Error al crear el inventario", "1");
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/pedido")
-    public ResponseEntity<Response> update(@RequestBody Pedido pedido) {
-        Optional<Pedido> pedidoOpt = pedidoService.readById(pedido.getId());
-        if (pedidoOpt.isPresent()) {
-            Pedido pedidoActualizado = pedidoService.update(pedido);
-            Response response = new Response("Pedido actualizado con éxito", "0", pedidoActualizado);
+    @PutMapping("/inventario")
+    public ResponseEntity<Response> update(@RequestBody Inventario inventario) {
+        Optional<Inventario> inventarioOpt = inventarioService.readById(inventario.getId());
+        if (inventarioOpt.isPresent()) {
+            Inventario inventarioActualizado = inventarioService.update(inventario);
+            Response response = new Response("Inventario actualizado con éxito", "0", inventarioActualizado);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            Response response = new Response("Pedido no encontrado", "1");
+            Response response = new Response("Inventario no encontrado", "1");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/pedido")
-    public ResponseEntity<Response> delete(@RequestBody Pedido pedido) {
-        Optional<Pedido> pedidoOpt = pedidoService.readById(pedido.getId());
-        if (pedidoOpt.isPresent()) {
-            String resultado = pedidoService.delete(pedido);
+    @DeleteMapping("/inventario")
+    public ResponseEntity<Response> delete(@RequestBody Inventario inventario) {
+        Optional<Inventario> inventarioOpt = inventarioService.readById(inventario.getId());
+        if (inventarioOpt.isPresent()) {
+            String resultado = inventarioService.delete(inventario);
             Response response = new Response(resultado, "0");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            Response response = new Response("Pedido no encontrado", "1");
+            Response response = new Response("Inventario no encontrado", "1");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping("/pedidoResponseIdClienteQuery/{id}")
-    public ResponseEntity<Response> findByClienteIdResponse(@PathVariable Long id){
-        List<PedidoResponse> pedidosResponse = pedidoService.findPedidosByClienteId(id);
-        if (pedidosResponse.isEmpty()) {
-            Response response = new Response("No se encontraron pedidos", "1");
+    @GetMapping("/inventarioResponseIsActiveTrueQuery/{id}")
+    public ResponseEntity<Response> findByIsActiveTrue() {
+        List<InventarioResponse> inventariosResponse = inventarioService.findByIsActiveTrue();
+        if (inventariosResponse.isEmpty()) {
+            Response response = new Response("No se encontraron inventarios", "1");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         } else {
-            Response response = new Response("Éxito", "0", pedidosResponse);
+            Response response = new Response("Éxito", "0", inventariosResponse);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
     }
