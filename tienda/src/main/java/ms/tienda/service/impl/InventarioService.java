@@ -21,13 +21,13 @@ public class InventarioService implements IInventarioService {
     private InventarioMapper inventarioMapper;
 
     @Override
-    public Optional<Inventario> readById(Long id) {
-        return inventarioRepository.findById(id);
+    public Optional<Inventario> readByIdProducto(Long id) {
+        return inventarioRepository.findByProducto_Id(id);
     }
 
     @Override
-    public Optional<InventarioResponse> readByIdResponse(Long id) {
-        Optional<Inventario> inventarioOpt = inventarioRepository.findById(id);
+    public Optional<InventarioResponse> readByIdProductoResponse(Long id) {
+        Optional<Inventario> inventarioOpt = inventarioRepository.findByProducto_Id(id);
         return inventarioOpt.map(inventarioMapper::toInventarioResponse);
     }
 
@@ -65,7 +65,7 @@ public class InventarioService implements IInventarioService {
 
     @Override
     public String delete(Inventario inventario) {
-        if(inventario.equals(inventarioRepository.findById(inventario.getId()).orElse(null))){
+        if(inventario.equals(inventarioRepository.findByProducto_Id(inventario.getProducto().getId()).orElse(null))){
             inventario.setIsActive(false);
             inventarioRepository.save(inventario);
             return "Inventario eliminado";

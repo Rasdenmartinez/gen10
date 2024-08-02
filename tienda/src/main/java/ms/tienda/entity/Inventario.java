@@ -16,7 +16,10 @@ public class Inventario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
+    @OneToOne
+    @JoinColumn(name= "producto_id")
+    private Producto producto;
     @Column(name = "cantidad_stock")
     private Integer stock;
     @Column(name = "is_active")

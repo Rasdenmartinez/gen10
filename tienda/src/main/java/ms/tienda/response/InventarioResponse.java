@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ms.tienda.entity.Producto;
 
 @Builder
 @Data
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InventarioResponse {
 
-    private Long id;
+    private Producto producto;
     private Integer stock;
 
 }

@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface IInventarioService {
 
-    public Optional<Inventario> readById(Long id);
-    public Optional<InventarioResponse> readByIdResponse(Long id);
+    public Optional<Inventario> readByIdProducto(Long id);
+    public Optional<InventarioResponse> readByIdProductoResponse(Long id);
     public List<Inventario> readAll();
     public List<InventarioResponse> readAllResponse();
     public List<Inventario> findIsActive(Boolean isActive);

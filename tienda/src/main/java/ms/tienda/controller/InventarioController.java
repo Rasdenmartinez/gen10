@@ -20,7 +20,7 @@ public class InventarioController {
     InventarioService inventarioService;
     @GetMapping("/inventario/{id}")
     public ResponseEntity<Response> readById(@PathVariable Long id) {
-        Optional<Inventario> inventarioOpt = inventarioService.readById(id);
+        Optional<Inventario> inventarioOpt = inventarioService.readByIdProducto(id);
         Inventario inventario;
         if (inventarioOpt.isPresent()) {
             inventario = inventarioOpt.get();
@@ -34,7 +34,7 @@ public class InventarioController {
 
     @GetMapping("/inventarioResponse/{id}")
     public ResponseEntity<Response> readByIdResponse(@PathVariable Long id) {
-        Optional<InventarioResponse> inventarioOpt = inventarioService.readByIdResponse(id);
+        Optional<InventarioResponse> inventarioOpt = inventarioService.readByIdProductoResponse(id);
         InventarioResponse inventarioResponse;
         if (inventarioOpt.isPresent()) {
             inventarioResponse = inventarioOpt.get();
@@ -108,7 +108,7 @@ public class InventarioController {
 
     @PutMapping("/inventario")
     public ResponseEntity<Response> update(@RequestBody Inventario inventario) {
-        Optional<Inventario> inventarioOpt = inventarioService.readById(inventario.getId());
+        Optional<Inventario> inventarioOpt = inventarioService.readByIdProducto(inventario.getProducto().getId());
         if (inventarioOpt.isPresent()) {
             Inventario inventarioActualizado = inventarioService.update(inventario);
             Response response = new Response("Inventario actualizado con éxito", "0", inventarioActualizado);
@@ -121,7 +121,7 @@ public class InventarioController {
 
     @DeleteMapping("/inventario")
     public ResponseEntity<Response> delete(@RequestBody Inventario inventario) {
-        Optional<Inventario> inventarioOpt = inventarioService.readById(inventario.getId());
+        Optional<Inventario> inventarioOpt = inventarioService.readByIdProducto(inventario.getProducto().getId());
         if (inventarioOpt.isPresent()) {
             String resultado = inventarioService.delete(inventario);
             Response response = new Response(resultado, "0");
